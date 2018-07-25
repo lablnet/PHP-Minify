@@ -41,10 +41,7 @@ class Minify {
      */ 
   public function removeComments($file)
   {
-        $file = preg_replace("/<!--(.*?)-->/i" , "" ,$file);
-        $file = preg_replace("!/\*.*?\*/!s" , "" ,$file);
-        $file = preg_replace('@(?<!https:)+(?<!http:)+?<![A-Za-z0-9-]//.*@', '', $file);
-        return $file;
+      return preg_replace(['/<!--(.*?)-->/i','!/\*.*?\*/!s','@(?<!https:)+(?<!http:)+?<![A-Za-z0-9-]//.*'],['','',''],$file);
   }
   /**
      * Add single space after <?php
@@ -68,4 +65,12 @@ class Minify {
     $file = $this->removeComments($file);
     return $file;
   }
+  public function cssMinify($file,$type='file')
+  {
+    $file = $this->getFile($file,$type);
+    $file = $this->cleanSpaces($file);
+    $file = $this->fixMaster($file);
+    $file = $this->removeComments($file);
+    return preg_replace(['/;[\s\r\n\t]*?}[\s\r\n\t]*/ims','/;[\s\r\n\t]/ims','/[\s\r\n\t]*:[\s\r\n\t][\s+\/]/ims','/[\s\r\n\t]*,[\s\r\n\t]*?([^\s\r\n\t]\.[\s+\/])/ims','/[\s\r\n\t]/ims','/([\d\.]+)[\s\r\n\t]+(px|em|pt|%)/ims','/([^\s\.]0)(px|em|pt|%|ex|mm|in|pc|vh|vw|vmin)/ims','/\s+/'],['}',';$1',',$1','$1','$1$2','$1$2',' '],$file);
+  } 
 }

@@ -3,6 +3,7 @@
 
 ## Feature
  - Minify HTML
+ - Minify CSS
 
 ## TO-DO
-### Support for minify css and javaScript
+### Support for minify javaScript
