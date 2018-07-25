@@ -41,7 +41,7 @@ class Minify {
      */ 
   public function removeComments($file)
   {
-      return preg_replace(['/<!--(.*?)-->/i','!/\*.*?\*/!s','@(?<!https:)+(?<!http:)+?<![A-Za-z0-9-]//.*'],['','',''],$file);
+      return preg_replace(['/<!--(.*?)-->/i','!/\*.*?\*/!s','@(?<!https:)+(?<!http:)+?<![A-Za-z0-9-]//.*@'],['','',''],$file);
   }
   /**
      * Add single space after <?php
