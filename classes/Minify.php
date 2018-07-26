@@ -10,6 +10,7 @@
  *
  * @link   https://github.com/Lablnet/PHP-Minify-Class
  */
+
 class Minify
 {
     /**
@@ -73,6 +74,11 @@ class Minify
         return $file;
     }
 
+    /**
+     * Minify CSS.
+     *
+     * @return mix-data
+     */
     public function cssMinify($file, $type = 'file')
     {
         $file = $this->getFile($file, $type);
@@ -81,5 +87,20 @@ class Minify
         $file = $this->removeComments($file);
 
         return preg_replace(['/;[\s\r\n\t]*?}[\s\r\n\t]*/ims', '/;[\s\r\n\t]/ims', '/[\s\r\n\t]*:[\s\r\n\t][\s+\/]/ims', '/[\s\r\n\t]*,[\s\r\n\t]*?([^\s\r\n\t]\.[\s+\/])/ims', '/[\s\r\n\t]/ims', '/([\d\.]+)[\s\r\n\t]+(px|em|pt|%)/ims', '/([^\s\.]0)(px|em|pt|%|ex|mm|in|pc|vh|vw|vmin)/ims', '/\s+/'], ['}', ';$1', ',$1', '$1', '$1$2', '$1$2', ' '], $file);
+    }
+
+    /**
+     * Minify Js.
+     *
+     * @return mix-data
+     */
+    public function javascriptMinify($file, $type = 'file')
+    {
+        $file = $this->getFile($file, $type);
+        $file = preg_replace(["/\/\/(.*\s+)/", "/;+\}/"], ['', '}'], $file);
+        $file = $this->cleanSpaces($file);
+        $file = $this->removeComments($file);
+
+        return $file;
     }
 }

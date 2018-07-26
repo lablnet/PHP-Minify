@@ -4,6 +4,4 @@
 ## Feature
  - Minify HTML
  - Minify CSS
-
-## TO-DO
-### Support for minify javaScript
+ - Minify JavaScript
