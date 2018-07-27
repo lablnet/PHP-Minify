@@ -10,7 +10,6 @@
  *
  * @link   https://github.com/Lablnet/PHP-Minify-Class
  */
-
 class Minify
 {
     /**
